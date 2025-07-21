@@ -1,0 +1,31 @@
+name: Check Website Status
+
+on:
+  schedule:
+    # این دستور به معنی "اجرا در هر 5 دقیقه" است
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    # این خط به شما اجازه می‌دهد که Workflow را به صورت دستی هم اجرا کنید
+
+jobs:
+  check-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run website checker script
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python checker.py
