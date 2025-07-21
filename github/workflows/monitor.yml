@@ -3,7 +3,7 @@ name: Check Website Status
 on:
   schedule:
     # این دستور به معنی "اجرا در هر 5 دقیقه" است
-    - cron: '*/30 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
     # این خط به شما اجازه می‌دهد که Workflow را به صورت دستی هم اجرا کنید
 
